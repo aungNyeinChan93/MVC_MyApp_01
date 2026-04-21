@@ -5,7 +5,7 @@ using mvc_02.Models;
 
 namespace mvc_02.Services
 {
-    public class ItemService
+    public class ItemService : IItemService
     {
         private readonly AppDbContext _context;
 
@@ -16,7 +16,7 @@ namespace mvc_02.Services
 
         public async Task<List<Item>?> GetAllAsync()
         {
-            var items = await _context.Items.AsNoTracking().Include(i=>i.Category).ToListAsync();
+            var items = await _context.Items.AsNoTracking().Include(i => i.Category).ToListAsync();
             return items;
         }
 
@@ -25,7 +25,7 @@ namespace mvc_02.Services
             var item = await _context.Items
                     .AsNoTracking()
                     .Include(i => i.Category)
-                    .FirstOrDefaultAsync(i=>i.ItemId == id);
+                    .FirstOrDefaultAsync(i => i.ItemId == id);
             return item;
         }
 
@@ -44,17 +44,17 @@ namespace mvc_02.Services
 
             await _context.Items.AddAsync(newItem);
             var result = await _context.SaveChangesAsync();
-            return result >=1 ? newItem : default!;
+            return result >= 1 ? newItem : default!;
         }
 
-        public async Task<bool> UpdateAsync(int id,UpdateItemDto updateItemDto)
+        public async Task<bool> UpdateAsync(int id, UpdateItemDto updateItemDto)
         {
             if (updateItemDto is null)
             {
                 return default!;
             }
 
-            var item = await _context.Items.AsNoTracking().FirstOrDefaultAsync(i=> i.ItemId == id);
+            var item = await _context.Items.AsNoTracking().FirstOrDefaultAsync(i => i.ItemId == id);
 
             if (item is null)
             {
@@ -81,7 +81,7 @@ namespace mvc_02.Services
             _context.Items.Remove(item);
             _context.Entry(item).State = EntityState.Deleted;
             var result = await _context.SaveChangesAsync();
-            return result >=1 ? true : false;
+            return result >= 1 ? true : false;
 
         }
     }

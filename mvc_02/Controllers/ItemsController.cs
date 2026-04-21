@@ -6,11 +6,11 @@ namespace mvc_02.Controllers
 {
     public class ItemsController : Controller
     {
-        private readonly ItemService _itemService;
+        private readonly IItemService _itemService;
 
         private readonly CategoryService categoryService;
 
-        public ItemsController(ItemService itemService, CategoryService categoryService)
+        public ItemsController(IItemService itemService, CategoryService categoryService)
         {
             _itemService = itemService;
             this.categoryService = categoryService;

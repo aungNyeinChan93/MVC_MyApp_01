@@ -12,7 +12,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 });
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<ItemService>();
+builder.Services.AddScoped<IItemService,ItemService>();
 builder.Services.AddScoped<CategoryService>();
 
 var app = builder.Build();
