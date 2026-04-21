@@ -13,6 +13,11 @@
             <li class="list-group-item">@Model.Category!.Name</li>
             <li class="list-group-item">@Model.Price</li>
         </ul>
-        <a  href="/items" class="btn btn-primary p-2 my-2 mx-4">Back</a>
+        <div class=" d-flex justify-content-between">
+
+            <a href="/items/edit/@Model.ItemId" class="btn btn-warning p-2 my-2 mx-4 w-100">Edit</a>
+            <a href="/items" class="btn btn-primary p-2 my-2 mx-4 w-100 ">Back</a>
+
+        </div>
     </div>
 </div>

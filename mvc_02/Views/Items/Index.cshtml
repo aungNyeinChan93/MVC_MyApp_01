@@ -4,6 +4,7 @@
 
 @{
     ViewData["Title"] = "All Items";
+
 }
 
 
@@ -18,7 +19,12 @@
             <li class="list-group-item">
                 <div class="d-flex justify-content-between align-items-center">
                     <p>@(item.Name)</p>
-                    <a href="/items/detail/@item.ItemId" class="btn btn-info ">Detail</a>
+                    <div class="d-flex justify-content-between">
+                        <a href="/items/detail/@item.ItemId" class="btn btn-info me-2">Detail</a>
+                        <form action="/items/delete/@item.ItemId" method="post">
+                            <button type="submit" class="btn btn-danger" >Delete</button>    
+                        </form>
+                    </div>
                 </div>
             </li> 
         }

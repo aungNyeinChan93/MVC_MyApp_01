@@ -46,5 +46,43 @@ namespace mvc_02.Services
             var result = await _context.SaveChangesAsync();
             return result >=1 ? newItem : default!;
         }
+
+        public async Task<bool> UpdateAsync(int id,UpdateItemDto updateItemDto)
+        {
+            if (updateItemDto is null)
+            {
+                return default!;
+            }
+
+            var item = await _context.Items.AsNoTracking().FirstOrDefaultAsync(i=> i.ItemId == id);
+
+            if (item is null)
+            {
+                return false;
+            }
+
+            item.Name = updateItemDto.Name;
+            item.Price = updateItemDto.Price;
+            item.CategoryId = updateItemDto.CategoryId;
+
+            _context.Entry(item).State = EntityState.Modified;
+            var result = await _context.SaveChangesAsync();
+            return result >= 1 ? true : false;
+
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var item = await _context.Items.AsNoTracking().FirstOrDefaultAsync(i => i.ItemId == id);
+            if (item is null)
+            {
+                return false;
+            }
+            _context.Items.Remove(item);
+            _context.Entry(item).State = EntityState.Deleted;
+            var result = await _context.SaveChangesAsync();
+            return result >=1 ? true : false;
+
+        }
     }
 }

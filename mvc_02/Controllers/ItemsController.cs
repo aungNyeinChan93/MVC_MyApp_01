@@ -56,9 +56,37 @@ namespace mvc_02.Controllers
 
         [HttpGet]
         [ActionName("Edit")]
-        public async Task<IActionResult> ItemEdit()
+        public async Task<IActionResult> ItemEdit(int id)
         {
-            return View("ItemEdit");
+            var item = await _itemService.GetOneAsync(id);
+            var categories = await categoryService.GetAllAsync();
+            ViewBag.categories = categories;
+            return View("ItemEdit",item);
         }
+
+        [HttpPost]
+        [ActionName("Update")]
+        public async Task<IActionResult> ItemUpdate(int id,UpdateItemDto updateItemDto)
+        {
+            var result = await _itemService.UpdateAsync(id,updateItemDto);
+            if (!result)
+            {
+                return NotFound();
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public async Task<IActionResult> ItemDelete(int id)
+        {
+            var result = await _itemService.DeleteAsync(id);
+            if (!result)
+            {
+                return BadRequest();
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }
