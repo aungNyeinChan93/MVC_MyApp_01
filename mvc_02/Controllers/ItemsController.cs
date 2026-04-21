@@ -41,8 +41,13 @@ namespace mvc_02.Controllers
 
         [HttpPost]
         [ActionName("Save")]
-        public async Task<IActionResult> ItemSave(CreateItemDto createItemDto)
+        public async Task<IActionResult> ItemSave([Bind("Name,CategoryId,Price")]CreateItemDto createItemDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             if (int.TryParse(Request.Form["CategoryId"], out var categoryId))
             {
                 createItemDto.CategoryId = categoryId;
