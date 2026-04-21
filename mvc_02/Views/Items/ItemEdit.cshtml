@@ -4,9 +4,24 @@
 
 @{
     ViewData["Title"] = "Edit Item";
-    var categories = ViewBag.categories;
+    var categories = ViewBag.categories as List<Category>;
 }
 
+
+@* //Test *@
+<div>
+    @foreach (var c in categories!)
+    {
+        foreach (var item in c.Items!)
+        {
+            if (item.CategoryId == Model.CategoryId)
+            {
+                <p>@item.Name</p>
+                <p>@item.Category?.Name</p>
+            }
+        }
+    } 
+</div>
 
 <div class=" mx-auto container">
     <form method="post" action="/items/update/@Model.ItemId">

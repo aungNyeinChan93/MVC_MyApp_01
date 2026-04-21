@@ -15,7 +15,7 @@ namespace mvc_02.Services
 
         public async Task<List<Category>> GetAllAsync()
         {
-            var categories = await _context.Categories.AsNoTracking().ToListAsync();
+            var categories = await _context.Categories.AsNoTracking().Include(c=>c.Items).ToListAsync();
             return categories;
         }
     }
