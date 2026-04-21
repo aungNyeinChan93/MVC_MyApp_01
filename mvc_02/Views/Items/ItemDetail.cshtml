@@ -1,0 +1,18 @@
+﻿@using mvc_02.Models
+
+@model Item
+
+@{
+    // ViewData["Title"] = "Detail Item";
+}
+
+<div class="mx-auto container">
+    <div class="card" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">@Model.Name</li>
+            <li class="list-group-item">@Model.Category!.Name</li>
+            <li class="list-group-item">@Model.Price</li>
+        </ul>
+        <a  href="/items" class="btn btn-primary p-2 my-2 mx-4">Back</a>
+    </div>
+</div>

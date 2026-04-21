@@ -1,0 +1,27 @@
+﻿@using mvc_02.Models
+
+@model List<Item>
+
+@{
+    ViewData["Title"] = "All Items";
+}
+
+
+<div class="mx-auto container">
+    <h3 class="p-2 my-2 text-bg-primary link-underline rounded text-center">@ViewData["Title"]</h3>
+    <div>
+        <a href="/items/create" class=" btn btn-outline-success my-2">Create</a>
+    </div>
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                    <p>@(item.Name)</p>
+                    <a href="/items/detail/@item.ItemId" class="btn btn-info ">Detail</a>
+                </div>
+            </li> 
+        }
+    </ul>
+
+</div>

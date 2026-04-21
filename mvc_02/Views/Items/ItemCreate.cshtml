@@ -1,0 +1,29 @@
+﻿@using mvc_02.Models
+
+@model List<Category>
+@{
+    ViewData["Title"] = "Create Item";
+}
+
+<div class="mx-auto container"> 
+    <form method="post" action="/items/save">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" aria-describedby="name" name="Name">
+        </div>
+        <div class="mb-3">
+            <label for="Price" class="form-label">Price</label>
+            <input type="number" class="form-control" id="price" name="Price">
+        </div>
+        <div class="mb-3">
+            <select name="CategoryId" class="form-select" aria-label="Default select example">
+                @foreach (var category in Model)
+                    {
+                        <option value="@category.CategoryId">@category.Name</option>
+                    }
+              
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
